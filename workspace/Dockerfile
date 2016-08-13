@@ -34,7 +34,6 @@ MAINTAINER Mahmoud Zalt <mahmoud@zalt.me>
 # in the `docker-compose.yml` before the build.
 #
 #   - INSTALL_XDEBUG=           false
-#   - INSTALL_MONGO=            false
 #   - COMPOSER_GLOBAL_INSTALL=  false
 #   - INSTALL_NODE=             false
 #
@@ -51,19 +50,6 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; then \
     apt-get install -y --force-yes php7.0-xdebug && \
     sed -i 's/^/;/g' /etc/php/7.0/cli/conf.d/20-xdebug.ini && \
     echo "alias phpunit='php -dzend_extension=xdebug.so /var/www/laravel/vendor/bin/phpunit'" >> ~/.bashrc \
-;fi
-
-#####################################
-# MongoDB:
-#####################################
-
-# Check if Mongo needs to be installed
-ARG INSTALL_MONGO=true
-ENV INSTALL_MONGO ${INSTALL_MONGO}
-RUN if [ ${INSTALL_MONGO} = true ]; then \
-    # Install the mongodb extension
-    pecl install mongodb && \
-    echo "extension=mongodb.so" >> /etc/php/7.0/cli/php.ini \
 ;fi
 
 #####################################

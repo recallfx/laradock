@@ -8,7 +8,6 @@ services:
         build:
             context: ./workspace
             args:
-                - INSTALL_MONGO=false
                 - INSTALL_XDEBUG=false
                 - INSTALL_NODE=true
                 - COMPOSER_GLOBAL_INSTALL=false
@@ -103,21 +102,6 @@ services:
             - "2080:2080"
         links:
             - beanstalkd
-
-### Caddy Server Container ##################################
-
-    caddy:
-        build: ./caddy
-        volumes_from:
-            - volumes_source
-        ports:
-            - "80:80"
-            - "443:443"
-            - "2015:2015"
-        volumes:
-            - ./caddy/Caddyfile:/etc/Caddyfile
-        links:
-            - php-fpm
 
 ### Laravel Application Code Container ######################
 
