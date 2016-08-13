@@ -51,17 +51,6 @@ services:
         links:
             - php-fpm
 
-### HHVM Container ##########################################
-
-    hhvm:
-        build: ./hhvm
-        volumes_from:
-            - volumes_source
-        expose:
-            - "9000"
-        links:
-            - workspace
-
 ### MySQL Container #########################################
 
     mysql:
